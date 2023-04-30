@@ -1,0 +1,31 @@
+{% extends "games/game_base.html" %}
+{% block pregame %}
+    <div class="col-md-4">
+        <div class="content">
+            <h2>Games</h2>
+            <p>Over 1000 games within your reach!</p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block game_content %}
+    <div class="col-md-8">
+        <div class="list-game">
+            {% for game in object_list %}
+                <a class="list-game-item" href="{% url 'games:single' slug=game.slug %}">
+                    <h3 class="title list-game-item-heading">{{ game.name }}</h3>
+                    <img class="list-game-item-image" src="{{ game.game_pic.url }}">
+                    <div class="list-game-item-text container-fluid">
+                        {{ game.description|safe }}
+                        <div class="row">
+                            <div class="col-md-4">
+                                <span class="badge">{{ game.posts.count }}</span>
+                                available{{ game.posts.count|pluralize }}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

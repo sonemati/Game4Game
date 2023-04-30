@@ -1,0 +1,17 @@
+{% extends "games/game_base.html" %}
+{% block pregame %}
+    <h1>{{ game.name }}</h1>
+    <h2>Swappers: {{ game.owners.count }}</h2>
+{% endblock %}
+
+{% block game_content %}
+    <div class="col-md-8">
+        {% if game.posts.count == 0 %}
+            <h2>No games available on our website yet!</h2>
+        {% else %}
+            {% for post in game.posts.all %}
+                {% include "posts/_post.html" %}
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
